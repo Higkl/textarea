@@ -1,0 +1,271 @@
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Textarea</title>
+	<link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+<!-- =======================  html start  ======================= -->
+
+
+<div class="container">
+	<div class="row-1">
+		<input class="key-input" type="text">
+		<input class="name-input" type="text" value="0">
+		<button class="load-text-button">L</button>
+		<button class="save-text-button">S</button>
+		<button class="save-image-button">I > T</button>
+		<button class="enc-button">E</button>
+		<button class="repeat-button">F</button>
+	</div>
+	<div class="row-2">
+		<input class="start-input" type="text" value="1">
+		<input class="end-input" type="text" value="100">
+		<button class="h-button">H</button>
+		<button class="te-button">TE</button>
+		<button class="ts-button">TS</button>
+		<button class="oe-button">OE</button>
+		<button class="os-button">OS</button>
+	</div>
+	<div class="row-3">
+		<button class="clear-button">C</button>
+		<span class="length-span"></span>
+	</div>
+	<textarea class="content-textarea"></textarea>
+</div>
+
+<textarea class="link-textarea"></textarea>
+
+<div class="link-container"></div>
+
+<div class="redactor-container">
+	<input class="redactor-input" type="text" value="0.99">
+	<span class="redactor-span"></span>
+	<button class="redactor-button">OK</button>
+	<img src="" class="redactor-image">
+</div>
+
+
+<!-- =======================  html end  ======================= -->
+<style>
+/* =========================  css start  ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+	border: 0;
+	outline: none;
+	font: inherit;	
+	font-size: 100%;
+	font-weight: normal;
+	vertical-align: baseline;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	letter-spacing: 0;
+}
+*:after, *::before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}  
+a {
+    text-decoration: none;
+	background-color: transparent;
+	-webkit-text-decoration-skip: objects;
+}
+ol, ul {
+	list-style: none;
+}
+textarea {
+	overflow: auto;
+}
+article, aside, footer, header, main, nav, section {
+	display: block;
+}
+audio, video, canvas, progress {
+  display: inline-block;
+}
+
+
+
+
+
+body {
+	padding: 1%;
+}
+
+.container {
+	display: none;
+}
+
+@media (pointer: coarse) {
+	.container {
+		display: block;
+	}
+}
+
+.row-1 {
+	margin-bottom: 5px;
+}
+
+.row-2 {
+	margin-bottom: 7px;
+}
+
+.row-3 {
+	margin-bottom: 8px;
+}
+
+input[type="text"] {
+	border: solid 1px #ccc;
+	margin-right: 5px;
+	width: 30px;
+}
+
+button {
+	background-color: #d2d5da;
+	border-radius: 20px;
+	color: #f5f5f5;
+	padding: 2px 12px;
+}
+
+button:hover:active {
+    background-color: #95979a;
+}
+
+button:hover {
+    background-color: #adb0b4;
+}
+
+.enc-button{
+	margin-left: 15px;
+}
+
+@media (pointer: coarse) {
+	.save-text-button, .save-image-button, .enc-button, .repeat-button {
+		display: none;
+	}
+}
+
+.length-span {
+	margin-left: 2px;
+}
+
+textarea {
+	border: solid 1px;
+	display: block;
+	line-height: 1.5;
+	margin-bottom: 1.3%;
+	max-width: 100%;
+	white-space: pre-wrap;
+	width: 100%;
+}
+
+.content-textarea {
+	height: 400px;
+}
+
+.link-textarea {
+	height: 100px;
+}
+
+.link-container img {
+	cursor: zoom-in;
+	float: left;
+	margin-bottom: 1%;
+	margin-right: 1%;
+	vertical-align: top;
+	width: 24%;
+}
+
+.redactor-container {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.redactor-image {
+	max-height: 95%;
+	max-width: 95%;
+}
+
+.redactor-input {
+	left: 27px;
+    position: absolute;
+    top: 25px;
+}
+
+.redactor-span {
+	color: white;
+    left: 91px;
+    position: absolute;
+    top: 25px;
+}
+
+.redactor-button {
+    left: 155px;
+    position: absolute;
+    top: 25px;
+}
+
+.full-screen-div {
+    align-items: center;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.full-screen-image {
+	cursor: zoom-out;
+	height: 95vh;
+	object-fit: contain;
+	width: 95vw;
+}
+
+
+@media (pointer: coarse) {
+	.rotate-image {
+		height: 95vw;
+		transform: rotate(90deg);
+		width: 95vh;
+	}
+}
+
+
+/* ==========================  css end  ========================== */
+</style>
+
+
+
+<script>
+/* ==========================  js start ========================== */
+
+const log=console.log,query=document.querySelector.bind(document),queryAll=document.querySelectorAll.bind(document),create=document.createElement.bind(document);function css(e,t){const n=t.split(";");for(i in n){const t=n[+i].split(":")[0].trim(),o=n[+i].split(":")[1].trim();e.style.setProperty(t,o)}}function loadFile(e){const t=create("input");let n,o;t.type="file",t.onchange=function(){const i=new FileReader;i.onload=function(){e(i.result,n,o)},t.files[0].type.startsWith("text/")&&(n="text",o=t.files[0].name,i.readAsText(t.files[0])),t.files[0].type.startsWith("image/")&&(n="image",o=t.files[0].name,i.readAsDataURL(t.files[0]))},t.click()}function saveFile(e,t){const n=create("a");n.onclick=function(){this.href="data:application/txt;charset=utf-8,"+encodeURIComponent(e),this.download=t},n.click()}function encrypt(e){let t,n="";for(i in e)t=e.charCodeAt(+i)+11,n+=String.fromCharCode(t);return n}function decrypt(e){let t,n="";for(i in e)t=e.charCodeAt(+i)-11,n+=String.fromCharCode(t);return n}var globalData;!function(){let e=!0;window.onkeyup=function(t){120===t.keyCode&&e&&(css(query(".container"),"display: block"),e=!1)}}(),query(".load-text-button").onclick=function(){if("11"===query(".key-input").value){const e=create("script");e.src=query(".name-input").value+".js",document.body.appendChild(e),e.onload=function(){if("0"===query(".name-input").value)query(".content-textarea").value=decrypt(globalData);else{const e=create("div");e.className="full-screen-div";const t=create("img");t.src=decrypt(globalData),t.className="full-screen-image",t.onload=function(){t.naturalWidth>t.naturalHeight&&t.classList.add("rotate-image")},e.appendChild(t),document.body.appendChild(e),e.onclick=function(){document.body.removeChild(e)}}document.body.removeChild(e),globalData=""}}},query(".save-text-button").onclick=function(){"11"===query(".key-input").value&&saveFile('var globalData = "'+encrypt(query(".content-textarea").value).replace(/\\/g,"\\\\").replace(/\'/g,"\\'").replace(/\"/g,'\\"')+'"',"0.js")},function(){let e;function t(n,o){const i=new Image;i.onload=function(){!function(n){const i=create("canvas");i.width=n.width,i.height=n.height,i.getContext("2d").drawImage(n,0,0),function(n){const o=query(".redactor-container"),i=query(".redactor-input");query(".redactor-image").src=n;const c=Math.floor(1.07*(n.length-"data:image/jpeg;base64,".length));query(".redactor-span").innerHTML=Math.round(c/1e3)+" KB",css(o,"display: flex"),i.onchange=function(){t(e,+i.value)},query(".redactor-button").onclick=function(){var e=encrypt(n),t=e.replace(/\\/g,"\\\\").replace(/\'/g,"\\'").replace(/\"/g,'\\"'),i='var globalData = "'+t+'"';saveFile(i,"1.js"),css(o,"display: none")}}(i.toDataURL("image/jpeg",o))}(i)},i.src=n}query(".save-image-button").onclick=function(){if("11"===query(".key-input").value){loadFile(function(n){t(e=n,.99)})}}}(),function(){const e=query(".enc-button"),t=query(".content-textarea");let n=0;e.onclick=function(){"11"===query(".key-input").value&&(0===n?(t.value=encrypt(t.value),n=1,e.innerHTML="D"):1===n&&(t.value=decrypt(t.value),n=0,e.innerHTML="E"))}}(),query(".repeat-button").onclick=function(){const e=query(".content-textarea").value.split("\n"),t=[];for(i in e)e.indexOf(e[i])!==+i&&-1===t.indexOf(e[+i])&&(log(e[i]),t.push(e[i]))},function(){const e=query(".link-textarea"),t=query(".link-container");function n(e){const n=query(".start-input"),c=query(".end-input"),a=query(".length-span"),r=query(".content-textarea").value.split(/=========================/)[e].split("\n"),l=[];let u;for(i in r)r[i].startsWith("https://")&&l.push(r[i]);a.innerText=l.length,u=l.slice(+n.value-1,+c.value),t.innerHTML="",o(u)}function o(e){if(e.length>0){const n=e.shift();if(n.startsWith("https://")){const e=create("img");e.src=n,e.onerror=function(){e.alt=n},e.onclick=function(){const e=create("div");e.className="full-screen-div";const t=create("img");t.src=n,t.className="full-screen-image",t.onload=function(){t.naturalWidth>t.naturalHeight&&t.classList.add("rotate-image")},e.appendChild(t),document.body.appendChild(e),e.onclick=function(){document.body.removeChild(e)}},t.appendChild(e)}setTimeout(function(){o(e)},100),query(".clear-button").onclick=function(){e=[]}}}query(".h-button").onclick=function(){n(1)},query(".te-button").onclick=function(){n(2)},query(".ts-button").onclick=function(){n(3)},query(".oe-button").onclick=function(){n(4)},query(".os-button").onclick=function(){n(5)},e.onchange=function(){t.innerHTML="",o(e.value.split("\n"))}}();
+
+/* ==========================  js end ========================== */
+</script>
+</body>
+</html>
+
+
+
+
